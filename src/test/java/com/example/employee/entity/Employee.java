@@ -3,6 +3,7 @@ package com.example.employee.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Employee {
@@ -17,7 +18,7 @@ public class Employee {
     @Column
     private int companyId;
     @Column
-        private int salary;
+    private int salary;
 
     public Employee() {
     }
