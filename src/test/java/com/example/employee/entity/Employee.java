@@ -17,12 +17,12 @@ public class Employee {
     @Column
     private int companyId;
     @Column
-    private double salary;
+        private int salary;
 
     public Employee() {
     }
 
-    public Employee(int id, String name, int age, String gender, int companyId, double salary) {
+    public Employee(int id, String name, int age, String gender, int companyId, int salary) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -71,11 +71,11 @@ public class Employee {
         this.companyId = companyId;
     }
 
-    public double getSalary() {
+    public int getSalary() {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(int salary) {
         this.salary = salary;
     }
 }
