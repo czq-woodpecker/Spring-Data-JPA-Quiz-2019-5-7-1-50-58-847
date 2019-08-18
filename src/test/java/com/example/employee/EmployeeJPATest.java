@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
@@ -33,7 +34,7 @@ public class EmployeeJPATest {
     public void setUp() throws Exception {
         //本地启动mysql，创建employee_db数据库
         Flyway flyway = new Flyway();
-        flyway.setDataSource("jdbc:mysql://localhost:3306/employee_db","root","test");
+        flyway.setDataSource("jdbc:mysql://localhost:3306/employee_db","root","root");
         flyway.clean();
         flyway.migrate();
     }
@@ -96,7 +97,9 @@ public class EmployeeJPATest {
     public void should_deleted_employee_when_given_employee_name() throws Exception {
         //7.删除姓名是xiaohong的employee
         Employee expectedEmployee = new Employee(1,"xiaohong",19,"female",1,7000);
-        Employee actualEmployee = null;
+        employeeRepository.deleteByName("xiaohong");
+        Optional<Employee> employeeOptional = employeeRepository.findByName("xiaohong");
+        Employee actualEmployee = employeeOptional.isPresent() ? employeeOptional.get() : null;
         assertThat(actualEmployee).isNull();
     }
 }
